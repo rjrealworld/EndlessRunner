@@ -1,0 +1,115 @@
+\documentclass[14pt]{beamer}
+
+\title{Endless Runner}
+\subtitle{Dodge Your Way Through the Path}
+\author[Team 3]{Riya Jain, S Sharanya, Fariyal Ajrad}
+\date{\today}
+
+\setbeamercolor{altered text}{fg = cyan}
+\setbeamercolor{frametitle}{fg=cyan}
+\usepackage{animate}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetheme{Warsaw}
+\usecolortheme{magpie}
+
+\newcommand{\progressbar}{%
+\pgfmathsetmacro{\theta}{360/\inserttotalframenumber*\insertframenumber}
+\begin{tikzpicture}[scale=0.035]
+\fill[white] (0, 0) circle (9);
+\fill[cyan] (0, 0) -- (9, 0) arc (0:-\theta:9);
+\fill[black] (0, 0) circle (5);
+\node at (0, 0) {\insertframenumber};
+\end{tikzpicture}
+}
+
+\setbeamertemplate{footline}{\hfill \progressbar}
+\begin{document}     
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}   
+    \frametitle{Overview}      
+    This is an Android platform game project consisting of mutiple themes.
+\end{frame}
+
+\begin{frame}
+    \frametitle{Technical Stack}
+    \begin{itemize}
+    \item Unity 3D
+    \item Android SDK
+    \item C\# Script
+    \item Adobe Photoshop
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Description}
+    Inspiration from 
+    \begin{itemize}
+    \item Subway Surfers
+    \item Temple Run
+    \item Rail Rush
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Features}
+    \begin{itemize}
+    \item 3D themes
+    \item Touch accessible
+    \item Different screen size
+    \item Unity Assets 
+    \item Mixamo characters
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Themes}
+    \begin{itemize}
+    \item Forest
+    \item Snow
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Status}
+    \begin{table}
+    \begin{tabular}{c | l}
+        Start Date & Project Stage and Objectives \\
+    \hline \hline
+    1st week & Structure, tech stack\\
+    2nd week & Design, GitHub repo\\
+    3rd week & Graphics and prefabs\\
+    4th week & Built two themes\\
+    \end{tabular}
+    \caption{Project Current Status}
+    Current Status: Fixing some bugs and trying to complete both the themes with mobile inputs. 
+    \end{table}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Obstacles}
+    \begin{itemize}
+    \item Touch feature
+    \item Player animations
+    \item Simultaneous work
+    \item Gyroscopic feature
+    \item Creating a 3D model
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Learnings}
+    \begin{itemize}
+    \item Working with LaTeX.
+    \item Exploring game dev field
+    \item Team co-ordination
+    \item Need of patience
+    \item Creativity and graphic designing
+    \end{itemize}  
+\end{frame}
+
+\end{document}
