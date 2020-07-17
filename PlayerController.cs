@@ -6,10 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    private Touch initialTouch = new Touch();
-    private float distance = 0;
     private bool hasSwiped = false;
-    
     public bool jump = false;
     public bool slide = false;
 
@@ -228,7 +225,7 @@ public class PlayerController : MonoBehaviour
                 //swipe left
                 if(currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f && (laneNum > 1) && (laneNum <= 3) && !hasSwiped)
                 {
-                    hasSwiped = true;
+                    
                     Debug.Log("left swipe");
                     horizVel = -4;
                     StartCoroutine(stopLaneChange());
