@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,6 +34,11 @@ public class PlayerController : MonoBehaviour
     {        
         GetComponent<Rigidbody>().velocity = new Vector3 (horizVel, 0, zVel);
 
+
+        //Mobile Input
+        //Replace the aread between ---- with the lapControl function to get drag
+        // -----------------------------------------------
+        
         if(Input.GetMouseButtonDown(0))
         {
             //save began touch 2d point
@@ -85,23 +90,27 @@ public class PlayerController : MonoBehaviour
             }
                 
             //swipe left
-            if(currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f && (laneNum > 1) && (laneNum <= 3))
+            if(currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f && (laneNum > 1) && (laneNum <= 3) && !hasSwiped)
             {
+                hasSwiped = true;
                 Debug.Log("left swipe");
-                horizVel = -2;
+                horizVel = -4;
                 StartCoroutine(stopLaneChange());
-                laneNum -= 1;
+                laneNum -= 1;                
             }
             //swipe right
-            if(currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f && (laneNum >= 1) && (laneNum < 3))
+            if(currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f && (laneNum >= 1) && (laneNum < 3) && !hasSwiped)
             {
+                hasSwiped = true;
                 Debug.Log("right swipe");
-                horizVel = 2;
+                horizVel = 4;
                 StartCoroutine(stopLaneChange());
                 laneNum += 1;
             }
         }
+        // --------------------------------------
 
+        
         scoreText.text = score.ToString();
         if(score > 15)
         {   
@@ -121,8 +130,10 @@ public class PlayerController : MonoBehaviour
     
     IEnumerator stopLaneChange()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.25f);
         horizVel = 0;
+        Debug.Log(laneNum);
+        hasSwiped = false;
     }
 
     IEnumerator stopJump()
@@ -159,7 +170,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void MobSwipe()
+    void MobControl()
     {
         if(Input.touches.Length > 0)
         {
@@ -188,16 +199,14 @@ public class PlayerController : MonoBehaviour
                 } else {
                     jump = false;
                 }
+                anim.SetBool("isJump", jump);
 
                 if(jump == true)
                 {
-                    anim.SetBool("isJump", jump);
                     GetComponent<Rigidbody>().velocity = new Vector3 (horizVel, 3.5f, zVel);
                     StartCoroutine(stopJump());
-                } else if(jump == false) {
-                    anim.SetBool("isJump", jump);
                 }
-                
+                    
                 //swipe down
                 if(currentSwipe.y < 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
                 {
@@ -211,22 +220,30 @@ public class PlayerController : MonoBehaviour
                 {
                     anim.SetBool("isSlide", slide);
                     transform.Translate(0, 0, 0.1f);
+                    StartCoroutine(stopSlide());
                 } else if(slide == false) {
                     anim.SetBool("isSlide", slide);
                 }
                 
                 //swipe left
-                if(currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
+                if(currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f && (laneNum > 1) && (laneNum <= 3) && !hasSwiped)
                 {
+                    hasSwiped = true;
                     Debug.Log("left swipe");
+                    horizVel = -4;
+                    StartCoroutine(stopLaneChange());
+                    laneNum -= 1;
                 }
                 //swipe right
-                if(currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
+                if(currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f && (laneNum >= 1) && (laneNum < 3) && !hasSwiped)
                 {
+                    hasSwiped = true;
                     Debug.Log("right swipe");
+                    horizVel = 4;
+                    StartCoroutine(stopLaneChange());
+                    laneNum += 1;
                 }
             }
         }
     }
-
 }
